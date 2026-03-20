@@ -437,7 +437,8 @@ footer{background:var(--dark);border-top:1px solid var(--gold-dim);padding:56px;
   <div class="f-info">
     <strong>A Realty Group</strong>
     Алатауский район, Алматы<br>
-    <a href="tel:+87002251709">+7 (700) 225-17-09</a><br>
+    <a href="tel:+77002251709">+7 (700) 225-17-09</a><br>
+    <a href="tel:+77472713220">+7 (747) 271-32-20</a><br>
     Официальный партнёр BI Group
   </div>
   <div class="f-center">
@@ -463,17 +464,22 @@ footer{background:var(--dark);border-top:1px solid var(--gold-dim);padding:56px;
   <div class="s-box">
     <div class="s-icon">✓</div>
     <h3>Заявка принята!</h3>
-    <p>Спасибо! Сейчас откроется WhatsApp — там уже готово сообщение с вашими данными. Наш специалист ответит в течение нескольких минут.</p>
+    <p>Спасибо! Нажмите на кнопку ниже — откроется WhatsApp с готовым сообщением. Наш специалист ответит в течение нескольких минут.</p>
     <a class="wa-btn" id="waLink" href="#" target="_blank">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1C4.1 1 1 4.1 1 8c0 1.2.3 2.3.9 3.3L1 15l3.8-1c1 .5 2 .8 3.2.8 3.9 0 7-3.1 7-7s-3.1-7-7-7z" fill="white"/></svg>
-      Открыть WhatsApp
+      +7 (700) 225-17-09
     </a>
-    <button class="close-btn" onclick="closeOverlay()">Закрыть</button>
+    <a class="wa-btn" id="waLink2" href="#" target="_blank" style="background:#1da851;margin-top:8px">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1C4.1 1 1 4.1 1 8c0 1.2.3 2.3.9 3.3L1 15l3.8-1c1 .5 2 .8 3.2.8 3.9 0 7-3.1 7-7s-3.1-7-7-7z" fill="white"/></svg>
+      +7 (747) 271-32-20
+    </a>
+    <button class="close-btn" onclick="closeOverlay()" style="margin-top:16px">Закрыть</button>
   </div>
 </div>
 
 <script>
-const WA_NUMBER = '77002251709';
+const WA_NUMBER  = '77002251709';
+const WA_NUMBER2 = '77472713220';
 
 // Nav scroll
 const nav = document.getElementById('nav');
@@ -534,12 +540,14 @@ function handleForm(e){
     `\nПрошу связаться со мной для консультации.`
   );
 
-  const waUrl = `https://wa.me/${WA_NUMBER}?text=${msg}`;
-  document.getElementById('waLink').href = waUrl;
+  const waUrl  = `https://wa.me/${WA_NUMBER}?text=${msg}`;
+  const waUrl2 = `https://wa.me/${WA_NUMBER2}?text=${msg}`;
+  document.getElementById('waLink').href  = waUrl;
+  document.getElementById('waLink2').href = waUrl2;
   document.getElementById('overlay').classList.add('show');
   document.getElementById('reqForm').reset();
 
-  // Открыть WhatsApp автоматически
+  // Открыть первый WhatsApp автоматически
   setTimeout(() => window.open(waUrl, '_blank'), 800);
 }
 
