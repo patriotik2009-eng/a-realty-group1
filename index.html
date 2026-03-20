@@ -505,7 +505,10 @@ const po = new IntersectionObserver((entries) => {
 }, {threshold:.1});
 document.querySelectorAll('.p-item').forEach(el => po.observe(el));
 
-// Form → WhatsApp
+// Google Sheets URL
+const SHEET_URL = 'https://script.google.com/macros/s/AKfycbxx0Dgcadek9-nGdKIaPbwwlPfJohjBsGN5AQdG8yMwnKFvrDTUNocEdLMr3moAdCY8/exec';
+
+// Form → Google Sheets + WhatsApp
 function handleForm(e){
   e.preventDefault();
   const name    = document.getElementById('fName').value.trim();
@@ -513,6 +516,15 @@ function handleForm(e){
   const service = document.getElementById('fService').value;
   const comment = document.getElementById('fComment').value.trim();
 
+  // Сохранить в Google Sheets
+  fetch(SHEET_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({name, phone, service, comment})
+  }).catch(() => {}); // молча игнорируем ошибки сети
+
+  // WhatsApp сообщение
   const msg = encodeURIComponent(
     `Здравствуйте, A Realty Group! 👋\n\n` +
     `Меня зовут *${name}*.\n` +
@@ -527,7 +539,7 @@ function handleForm(e){
   document.getElementById('overlay').classList.add('show');
   document.getElementById('reqForm').reset();
 
-  // Auto-open WhatsApp after short delay
+  // Открыть WhatsApp автоматически
   setTimeout(() => window.open(waUrl, '_blank'), 800);
 }
 
